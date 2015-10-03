@@ -8,18 +8,19 @@
 	.global fibonacci
 	.type fibonacci, function
 fibonacci:
-	subs	r1, r0, #1
-    	it	le
-    	bxle	lr
-	mov	r2 ,#0
-    	mov	r3, #1
-.L1:
-	add	r0, r2, r3
-	mov	r2, r3
-	mov	r3, r0
-	subs	r1, #1
-	bgt	.L1
+	cmp r0, #1
+	it le
+	bxle lr
 
-    	bx	lr
+	push { r4, r5, lr }
+	sub r0, r0, #1
+	mov r5, r0
+	bl fibonacci
+	mov r4, r0
+
+	sub r0, r5, #1
+	bl fibonacci
+	add r0, r4
+	pop { r4, r5, pc }
 	.size fibonacci, .-fibonacci
 	.end
