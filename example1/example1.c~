@@ -5,7 +5,7 @@ int main()
 	int a, b, c;
 	a=10;
 	b=12;
-	c=div(a,b);
+	c=add(a,b);
 	return c;
 }
 
